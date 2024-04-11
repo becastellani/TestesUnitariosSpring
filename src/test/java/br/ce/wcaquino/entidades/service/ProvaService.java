@@ -1,12 +1,9 @@
-package br.ce.wcaquino.entidades.service;
+package br.ce.wcaquino.servicos;
+
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+
+
 
 import org.junit.Test;
 
@@ -15,23 +12,23 @@ import br.ce.wcaquino.entidades.Prova;
 
 
 public class ProvaService {
-	
+
 	public float CalcularMedia(Prova p1, Prova p2, Prova p3) {
 		float media = (p1.getNota() + p2.getNota() + p3.getNota()) / 3;
-		
+
 		return media;
 	}
-	
-	
-	public void teste_media() {
-		//Cenário
+
+	@Test
+	public void teste_media_aprovado() {
+		//cenario
 		ProvaService provaService = new ProvaService();
-		Prova prova1 = new Prova(10);
-		Prova prova2 = prova1;
-		Prova prova3 = new Prova(8);
-		
-		
-		//Ação
+		Prova prova1 = new Prova(7);
+		Prova prova2 = new Prova(8);
+		Prova prova3 = new Prova(9);
+
+
+		//acao
 		String status = "";
 		float media = provaService.CalcularMedia(prova1, prova2, prova3);
 		if(media >= 7) {
@@ -41,27 +38,21 @@ public class ProvaService {
 		}else if(media < 4) {
 			status = "Reprovado";
 		}
-		
-		//Validação
-		assertFalse(status != "Aprovado");
-		assertTrue(status == "Aprovado");
-		assertNotNull(status);
+
+		//validacao
 		assertEquals(status, "Aprovado");
-		assertSame(prova1, prova2);
-		assertNotSame(prova1, prova3);
-		assertTrue(prova1.equals(prova2));
 	}
-	
+
 	@Test
-	public void teste_media_oportunidade() {
-		//Cenário
+	public void teste_media_2oportunidade() {
+		//cenario
 		ProvaService provaService = new ProvaService();
 		Prova prova1 = new Prova(4);
-		Prova prova2 = prova1;
+		Prova prova2 = new Prova(4);
 		Prova prova3 = new Prova(4);
-		
-		
-		//Ação
+
+
+		//acao
 		String status = "";
 		float media = provaService.CalcularMedia(prova1, prova2, prova3);
 		System.out.println(media);
@@ -72,27 +63,21 @@ public class ProvaService {
 		}else if(media < 4) {
 			status = "Reprovado";
 		}
-		
-		//Validação
-		assertFalse(status != "2 oportunidade");
-		assertTrue(status == "2 oportunidade");
-		assertNotNull(status);
+
+		//validacao
 		assertEquals(status, "2 oportunidade");
-		assertSame(prova1, prova2);
-		assertNotSame(prova1, prova3);
-		assertTrue(prova1.equals(prova2));
-		
 	}
-	
+
+	@Test
 	public void teste_media_reprovado() {
-		//Cenário
+		//cenario
 		ProvaService provaService = new ProvaService();
 		Prova prova1 = new Prova(2);
-		Prova prova2 = prova1;
+		Prova prova2 = new Prova(2);
 		Prova prova3 = new Prova(2);
-		
-		
-		//Ação
+
+
+		//acao
 		String status = "";
 		float media = provaService.CalcularMedia(prova1, prova2, prova3);
 		if(media >= 7) {
@@ -102,20 +87,8 @@ public class ProvaService {
 		}else if(media < 4) {
 			status = "Reprovado";
 		}
-		
-		//Validação
-		
-		assertFalse(status != "Reprovado");
-		assertTrue(status == "Reprovado");
-		assertNotNull(status);
+
+		//validacao
 		assertEquals(status, "Reprovado");
-		assertSame(prova1, prova2);
-		assertNotSame(prova1, prova3);
-		assertTrue(prova1.equals(prova2));
 	}
 }
-
-
-
-
-
